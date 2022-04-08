@@ -1,6 +1,6 @@
 # react-native-remote-metro
 
-A tool to scan a QR code containing a metro bundler URL, and load the bundle from it
+A tool to scan a QR code containing a metro bundler URL, and load the bundle from it.
 This lib is meant to be used from the native code, before React load the JS code.
 It will handle showing a QRCode reader and switching to the application view after it has loaded.
 
