@@ -1,6 +1,8 @@
 # react-native-remote-metro
 
-metro qr code reader
+A tool to scan a QR code containing a metro bundler URL, and load the bundle from it
+This lib is meant to be used from the native code, before React load the JS code.
+It will handle showing a QRCode reader and switching to the application view after it has loaded.
 
 ## Installation
 
@@ -10,12 +12,31 @@ npm install react-native-remote-metro
 
 ## Usage
 
-```js
-import { RemoteMetroView } from "react-native-remote-metro";
+_Currently only for iOS_
 
-// ...
+### IOS
 
-<RemoteMetroView color="tomato" />
+Inside your AppDelegate :
+
+```swift
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+
+        // ...
+
+
+        #if RCT_DEBUG // To prevent this code from being shipped in production environment.
+
+            var remoteMetro: RemoteMetro = RemoteMetro()
+
+            remoteMetro.injectRootViewController()
+            remoteMetro.moduleName = "myApp"
+            remoteMetro.options = launchOptions
+            remoteMetro.injectQrCodeController()
+        #endif
+
+        // ...
+
+    }
 ```
 
 ## Contributing
